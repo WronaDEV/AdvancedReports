@@ -1,0 +1,8 @@
+name: "ReportsByWrona"
+version: "0.0.1"
+main: "vb.$reportsbywrona.PluginMain"
+api-version: 1.13
+authors: [WronaDEV]
+commands:
+  report:
+permissions:
