@@ -11,6 +11,9 @@ public class PluginMain extends JavaPlugin implements Listener {
 
 	private static PluginMain instance;
 
+	public static Object GLOBAL_07b408f854675cb48b0e16c6b329ef79;
+	public static Object GLOBAL_6a5c9e43f016b70478e9fdf5a7d7a7dc;
+
 	@Override
 	public void onEnable() {
 		instance = this;
@@ -50,19 +53,36 @@ public class PluginMain extends JavaPlugin implements Listener {
 									PlayerDataManager.getInstance().getData(
 											((org.bukkit.OfflinePlayer) (Object) commandSender), "ActiveReport"),
 									((java.lang.Object) (Object) false))) {
-								org.bukkit.Bukkit.broadcastMessage(
-										(((((((ChatColor.translateAlternateColorCodes('&', "&8[&cREPORT ")
-												+ ((java.lang.String) commandSender.getName())) + "-")
-												+ String.valueOf(PlayerDataManager.getInstance().getData(
-														((org.bukkit.OfflinePlayer) (Object) commandSender),
-														"ActiveReport")))
-												+ ChatColor.translateAlternateColorCodes('&', "&8] &f"))
-												+ String.valueOf(commandSender))
-												+ ChatColor.translateAlternateColorCodes('&', " &8> &7"))
-												+ ((java.lang.String) null)));
-								((org.bukkit.command.CommandSender) (Object) ((boolean) ((org.bukkit.permissions.Permissible) null)
-										.hasPermission(((org.bukkit.permissions.Permission) null))))
-												.sendMessage(((java.lang.String[]) null));
+								PluginMain.GLOBAL_07b408f854675cb48b0e16c6b329ef79 = ((java.lang.Object) (Object) ((int) PluginMain
+										.createList(commandArgs).size()));
+								PluginMain.GLOBAL_6a5c9e43f016b70478e9fdf5a7d7a7dc = " ";
+								for (int loopNumber1 = 0; loopNumber1 < ((int) PluginMain.createList(commandArgs)
+										.size()); loopNumber1++) {
+									double FINAL_loopNumber1 = loopNumber1;
+									if (!PluginMain.checkEquals(GLOBAL_07b408f854675cb48b0e16c6b329ef79,
+											((java.lang.Object) (Object) (0d)))) {
+										PluginMain.GLOBAL_07b408f854675cb48b0e16c6b329ef79 = ((java.lang.Object) (Object) (((Number) GLOBAL_07b408f854675cb48b0e16c6b329ef79)
+												.doubleValue() + (1d)));
+										PluginMain.GLOBAL_6a5c9e43f016b70478e9fdf5a7d7a7dc = ((String
+												.valueOf(GLOBAL_6a5c9e43f016b70478e9fdf5a7d7a7dc)
+												+ (commandArgs.length > ((Number) GLOBAL_07b408f854675cb48b0e16c6b329ef79)
+														.intValue()
+																? commandArgs[((Number) GLOBAL_07b408f854675cb48b0e16c6b329ef79)
+																		.intValue()]
+																: null))
+												+ "");
+										org.bukkit.Bukkit.broadcastMessage(
+												String.valueOf(GLOBAL_6a5c9e43f016b70478e9fdf5a7d7a7dc));
+									}
+								}
+								org.bukkit.Bukkit.broadcastMessage((((((ChatColor.translateAlternateColorCodes('&',
+										"&8[&c")
+										+ String.valueOf(PlayerDataManager.getInstance().getData(
+												((org.bukkit.OfflinePlayer) (Object) commandSender), "ActiveReport")))
+										+ ChatColor.translateAlternateColorCodes('&', "&8] &7"))
+										+ ((java.lang.String) commandSender.getName()))
+										+ ChatColor.translateAlternateColorCodes('&', " &f"))
+										+ String.valueOf(GLOBAL_6a5c9e43f016b70478e9fdf5a7d7a7dc)));
 							}
 						}
 					}
@@ -82,25 +102,24 @@ public class PluginMain extends JavaPlugin implements Listener {
 											((org.bukkit.OfflinePlayer) (Object) commandSender), "ActiveReport"),
 									((java.lang.Object) (Object) false))) {
 						PlayerDataManager.getInstance().setData(((org.bukkit.OfflinePlayer) (Object) commandSender),
-								"ActiveReport", ((java.lang.Object) (Object) java.util.concurrent.ThreadLocalRandom
-										.current().nextInt(((int) (001d)), ((int) (999d)))));
-						new File(String.valueOf(PluginMain.getInstance().getDataFolder()),
-								(((((java.lang.String) commandSender.getName()) + "-")
-										+ String.valueOf(PlayerDataManager.getInstance().getData(
-												((org.bukkit.OfflinePlayer) (Object) commandSender), "ActiveReport")))
+								"ActiveReport",
+								((((java.lang.String) commandSender.getName()) + "-")
+										+ String.valueOf(java.util.concurrent.ThreadLocalRandom.current()
+												.nextInt(((int) (0001d)), ((int) (9999d))))));
+						new File((((java.lang.String) null) + String.valueOf(PluginMain.getInstance().getDataFolder())),
+								(String.valueOf(PlayerDataManager.getInstance()
+										.getData(((org.bukkit.OfflinePlayer) (Object) commandSender), "ActiveReport"))
 										+ ".report")).createNewFile();
-						commandSender.sendMessage(
-								(((((((ChatColor.translateAlternateColorCodes('&', "&fUtworzono report o ID: &c")
-										+ ((java.lang.String) commandSender.getName())) + "-")
-										+ String.valueOf(PlayerDataManager.getInstance()
-												.getData(((org.bukkit.OfflinePlayer) (Object) commandSender),
-														"ActiveReport")))
-										+ "\n")
-										+ ChatColor.translateAlternateColorCodes('&',
-												"&7Uzyj komendy: &a/report <wiadomosc> &7aby napisac do administracji!"))
-										+ "\n")
-										+ ChatColor.translateAlternateColorCodes('&',
-												"&7Jesli postanowisz zamknac report uzyj komendy: &a/report close")));
+						commandSender.sendMessage((((((ChatColor.translateAlternateColorCodes('&',
+								"&fUtworzono report o ID: &c")
+								+ String.valueOf(PlayerDataManager.getInstance()
+										.getData(((org.bukkit.OfflinePlayer) (Object) commandSender), "ActiveReport")))
+								+ "\n")
+								+ ChatColor.translateAlternateColorCodes('&',
+										"&7Uzyj komendy: &a/report <wiadomosc> &7aby napisac do administracji!"))
+								+ "\n")
+								+ ChatColor.translateAlternateColorCodes('&',
+										"&7Jesli postanowisz zamknac report uzyj komendy: &a/report close")));
 					} else {
 						commandSender.sendMessage(
 								((ChatColor.translateAlternateColorCodes('&', "&cMasz juz otworzony report o ID: &a")
@@ -109,6 +128,10 @@ public class PluginMain extends JavaPlugin implements Listener {
 										+ ChatColor.translateAlternateColorCodes('&',
 												"&c. Jesli chcesz stworzyc nowy report musisz zamknac juz otwarty!")));
 					}
+				}
+				if (PluginMain.checkEquals((commandArgs.length > ((int) (0d)) ? commandArgs[((int) (0d))] : null),
+						"info")) {
+					commandSender.sendMessage("Soon...!");
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
